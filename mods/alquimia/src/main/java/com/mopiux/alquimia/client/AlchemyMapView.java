@@ -300,13 +300,15 @@ public class AlchemyMapView {
                 int size = Mth.clamp((int) (zr * 1.3f), 9, 18);
                 g.blit(Math.round(zx - size / 2f), Math.round(zy - size / 2f), 0, size, size, sprite);
             } else if (isRevealedArea(map, k, z.x(), z.y(), z.radius())) {
-                g.blit(ICONS, Math.round(zx - 5), Math.round(zy - 5), 12f, 12f, 10, 10, ICONS_SIZE, ICONS_SIZE);
+                int size = Mth.clamp(Math.round(zr * 1.3f), 6, 10);
+                g.blit(ICONS, Math.round(zx - size / 2f), Math.round(zy - size / 2f), size, size, 12f, 12f, 10, 10, ICONS_SIZE, ICONS_SIZE);
             }
         }
         for (AlchemyMap.Hazard hz : map.hazards()) {
             float hx = sx(hz.x()), hy = sy(hz.y());
             if (!onScreen(hx, hy, hz.radius() * zoom) || !isRevealedArea(map, k, hz.x(), hz.y(), hz.radius())) continue;
-            g.blit(ICONS, Math.round(hx - 6), Math.round(hy - 6), 0f, 0f, 12, 12, ICONS_SIZE, ICONS_SIZE);
+            int size = Mth.clamp(Math.round(hz.radius() * zoom * 1.5f), 6, 12);
+            g.blit(ICONS, Math.round(hx - size / 2f), Math.round(hy - size / 2f), size, size, 0f, 0f, 12, 12, ICONS_SIZE, ICONS_SIZE);
         }
         g.blit(ICONS, Math.round(sx(0) - 5), Math.round(sy(0) - 5), 0f, 12f, 10, 10, ICONS_SIZE, ICONS_SIZE);
         if (brew != null) {

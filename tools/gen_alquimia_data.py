@@ -664,9 +664,9 @@ t("gui.alquimia.heat.tooltip",
   "Sin fuego debajo no se puede remover. Fogata, fuego o magma dan calor suave; lava o fuego de almas, calor intenso (remueve más rápido).",
   "You can't stir without heat below. Campfire, fire or magma give gentle heat; lava or soul fire give strong heat (stirs faster).")
 t("gui.alquimia.stirring", "Removiendo…", "Stirring…")
-t("gui.alquimia.path", "Camino pendiente: %s", "Pending path: %s")
-t("gui.alquimia.ingredients_used", "Ingredientes usados: %s", "Ingredients used: %s")
-t("gui.alquimia.essences", "Esencias fijadas: %s/%s", "Fixed essences: %s/%s")
+t("gui.alquimia.path", "Camino: %s", "Path: %s")
+t("gui.alquimia.ingredients_used", "Ingredientes: %s", "Ingredients: %s")
+t("gui.alquimia.essences", "Esencias: %s/%s", "Essences: %s/%s")
 t("gui.alquimia.prolonged", "Prolongado ×%s", "Prolonged ×%s")
 t("gui.alquimia.empowered", "Potenciada con azufre", "Empowered with sulfur")
 t("gui.alquimia.map.mixture", "Mezcla", "Mixture")

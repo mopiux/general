@@ -70,6 +70,7 @@ public final class AutoTest {
     private static int stepTicks;
     private static volatile BlockPos origin;
     private static int shots;
+    private static volatile boolean foundNaturalOre;
 
     private AutoTest() {
     }
@@ -138,21 +139,25 @@ public final class AutoTest {
             }
             case 4 -> {
                 shot(mc, "01_laboratorio");
-                onServer(mc, sp -> {
-                    sp.teleportTo(origin.getX() + 0.5, origin.getY(), origin.getZ() - 1.2);
-                    sp.setYRot(180f);
-                    sp.setXRot(8f);
-                    sp.setYHeadRot(180f);
-                });
+                onServer(mc, sp -> sp.teleportTo(sp.serverLevel(), origin.getX() + 0.5, origin.getY(), origin.getZ() - 0.8, 180f, 12f));
                 next(40);
             }
             case 5 -> {
                 shot(mc, "02_menas_y_bloques");
-                mc.options.hideGui = false;
-                onServer(mc, AutoTest::prepareBrew);
-                next(30);
+                onServer(mc, AutoTest::goToNaturalOre);
+                next(120);
             }
             case 6 -> {
+                if (foundNaturalOre) shot(mc, "09_mena_natural");
+                mc.options.hideGui = false;
+                onServer(mc, sp -> {
+                    sp.removeEffect(MobEffects.NIGHT_VISION);
+                    sp.teleportTo(sp.serverLevel(), origin.getX() - 0.5, origin.getY(), origin.getZ() + 3.5, 180f, 20f);
+                });
+                onServer(mc, AutoTest::prepareBrew);
+                next(40);
+            }
+            case 7 -> {
                 onServer(mc, sp -> {
                     BlockPos p = origin.offset(-2, 0, 1);
                     if (sp.level().getBlockEntity(p) instanceof AlchemicalCauldronBlockEntity be) {
@@ -161,12 +166,12 @@ public final class AutoTest {
                 });
                 next(60);
             }
-            case 7 -> {
+            case 8 -> {
                 // Pasar el ratón sobre la pata de conejo del inventario para ver la vista previa del camino
                 hoverSlotWithItem(mc, Items.RABBIT_FOOT);
                 next(20);
             }
-            case 8 -> {
+            case 9 -> {
                 shot(mc, "03_caldero");
                 onServer(mc, sp -> {
                     PlayerKnowledge k = AlchemyKnowledge.get(sp.server).of(sp.getUUID());
@@ -180,32 +185,32 @@ public final class AutoTest {
                 setMouse(mc, 5, 5);
                 next(30);
             }
-            case 9 -> {
+            case 10 -> {
                 shot(mc, "04_mapa_revelado");
                 mc.player.closeContainer();
                 mc.setScreen(new GrimoireScreen(mc.level.dimension().location()));
                 setMouse(mc, 5, 5);
                 next(30);
             }
-            case 10 -> {
+            case 11 -> {
                 shot(mc, "05_grimorio_esencias");
                 pressButton(mc, "gui.alquimia.grimoire.ingredients");
                 next(10);
             }
-            case 11 -> {
+            case 12 -> {
                 if (mc.screen != null) {
                     int left = (mc.screen.width - 300) / 2, top = (mc.screen.height - 190) / 2;
                     setMouse(mc, left + 158 + 9 + 21 * 2, top + 40 + 9 + 21);
                 }
                 next(20);
             }
-            case 12 -> {
+            case 13 -> {
                 shot(mc, "06_grimorio_ingredientes");
                 mc.setScreen(ClientSetup.createConfigScreen(null));
                 setMouse(mc, 5, 5);
                 next(30);
             }
-            case 13 -> {
+            case 14 -> {
                 shot(mc, "07_configuracion");
                 mc.setScreen(null);
                 onServer(mc, sp -> {
@@ -214,11 +219,11 @@ public final class AutoTest {
                 });
                 next(40);
             }
-            case 14 -> {
+            case 15 -> {
                 hoverSlotWithItem(mc, ModItems.ALCHEMICAL_POTION.get());
                 next(20);
             }
-            case 15 -> {
+            case 16 -> {
                 shot(mc, "08_objetos");
                 Alquimia.LOGGER.info("[AutoTest] Listo: {} capturas", shots);
                 mc.stop();
@@ -312,6 +317,8 @@ public final class AutoTest {
             level.addFreshEntity(frame);
         }
         // jugador mirando el laboratorio
+        sp.getAbilities().flying = true;
+        sp.onUpdateAbilities();
         sp.getInventory().clearContent();
         ItemStack groundSugar = new ItemStack(Items.SUGAR, 16);
         Grinding.set(groundSugar, 1f);
@@ -324,10 +331,48 @@ public final class AutoTest {
         sp.getInventory().add(new ItemStack(ModItems.QUICKSILVER.get(), 4));
         sp.getInventory().add(new ItemStack(Items.POTION, 1));
         sp.getInventory().add(new ItemStack(ModItems.GRIMOIRE.get()));
-        sp.teleportTo(o.getX() + 0.5, o.getY(), o.getZ() + 6.5);
-        sp.setYRot(180f);
-        sp.setXRot(18f);
-        sp.setYHeadRot(180f);
+        sp.teleportTo(level, o.getX() + 0.5, o.getY() + 1.2, o.getZ() + 6.5, 180f, 22f);
+    }
+
+    /** Busca una mena del mod generada naturalmente y visible desde una cueva, y lleva la cámara ahí. */
+    private static void goToNaturalOre(ServerPlayer sp) {
+        ServerLevel level = sp.serverLevel();
+        BlockPos spawn = level.getSharedSpawnPos();
+        java.util.Set<net.minecraft.world.level.block.Block> targets = java.util.Set.of(
+                ModBlocks.SALT_ORE.get(), ModBlocks.DEEPSLATE_SALT_ORE.get(),
+                ModBlocks.CINNABAR_ORE.get(), ModBlocks.DEEPSLATE_CINNABAR_ORE.get());
+        int cx0 = spawn.getX() >> 4, cz0 = spawn.getZ() >> 4;
+        BlockPos.MutableBlockPos p = new BlockPos.MutableBlockPos();
+        for (int ring = 0; ring <= 5; ring++) {
+            for (int cx = cx0 - ring; cx <= cx0 + ring; cx++) {
+                for (int cz = cz0 - ring; cz <= cz0 + ring; cz++) {
+                    if (Math.max(Math.abs(cx - cx0), Math.abs(cz - cz0)) != ring) continue;
+                    if (!level.hasChunk(cx, cz)) continue;
+                    for (int y = -60; y <= 60; y++) {
+                        for (int x = 0; x < 16; x++) {
+                            for (int z = 0; z < 16; z++) {
+                                p.set((cx << 4) + x, y, (cz << 4) + z);
+                                if (!targets.contains(level.getBlockState(p).getBlock())) continue;
+                                for (Direction d : Direction.Plane.HORIZONTAL) {
+                                    BlockPos a1 = p.relative(d), a2 = p.relative(d, 2), a3 = p.relative(d, 3);
+                                    if (level.isEmptyBlock(a1) && level.isEmptyBlock(a2) && level.isEmptyBlock(a3)
+                                            && level.isEmptyBlock(a2.below()) && level.isEmptyBlock(a2.above())) {
+                                        float yaw = (float) Math.toDegrees(Math.atan2(d.getStepX(), -d.getStepZ()));
+                                        sp.addEffect(new MobEffectInstance(MobEffects.NIGHT_VISION, 2400, 0, false, false));
+                                        sp.teleportTo(level, a2.getX() + 0.5, p.getY() - 1.1, a2.getZ() + 0.5, yaw, 5f);
+                                        foundNaturalOre = true;
+                                        Alquimia.LOGGER.info("[AutoTest] Mena natural en {} ({})", p.immutable(),
+                                                level.getBlockState(p).getBlock());
+                                        return;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        Alquimia.LOGGER.warn("[AutoTest] No se encontró una mena natural visible cerca del spawn");
     }
 
     private static void prepareBrew(ServerPlayer sp) {
