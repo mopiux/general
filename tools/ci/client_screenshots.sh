@@ -28,4 +28,6 @@ cp "mods/$MOD/run/screenshots/"*.png shots/ 2>/dev/null
 ls -la shots
 n=$(ls shots/*.png 2>/dev/null | wc -l)
 echo "Capturas: $n"
+grep -E "\[AutoTest\] (OK|FALLO)" client.log || true
+if grep -q "\[AutoTest\] FALLO" client.log; then echo "La prueba automática encontró fallos"; exit 1; fi
 [ "$n" -ge 6 ]

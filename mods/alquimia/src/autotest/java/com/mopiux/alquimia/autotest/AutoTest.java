@@ -13,6 +13,7 @@ import com.mopiux.alquimia.block.MortarBlockEntity;
 import com.mopiux.alquimia.client.ClientSetup;
 import com.mopiux.alquimia.client.GrimoireScreen;
 import com.mopiux.alquimia.item.AlchemicalPotionItem;
+import com.mopiux.alquimia.menu.CauldronMenu;
 import com.mopiux.alquimia.network.Network;
 import com.mopiux.alquimia.registry.ModBlocks;
 import com.mopiux.alquimia.registry.ModItems;
@@ -71,6 +72,7 @@ public final class AutoTest {
     private static volatile BlockPos origin;
     private static int shots;
     private static volatile boolean foundNaturalOre;
+    private static float pendingBefore;
 
     private AutoTest() {
     }
@@ -173,6 +175,41 @@ public final class AutoTest {
             }
             case 9 -> {
                 shot(mc, "03_caldero");
+                // Prueba real del circuito cliente → servidor → cliente: apretar «Remover»
+                if (mc.player.containerMenu instanceof CauldronMenu menu) pendingBefore = menu.brew().pendingLength();
+                pressButton(mc, "gui.alquimia.stir");
+                next(40);
+            }
+            case 10 -> {
+                if (mc.screen != null) mc.screen.mouseReleased(0, 0, 0);
+                next(15);
+            }
+            case 11 -> {
+                if (mc.player.containerMenu instanceof CauldronMenu menu) {
+                    float after = menu.brew().pendingLength();
+                    if (after < pendingBefore - 5f) {
+                        Alquimia.LOGGER.info("[AutoTest] OK remover: camino {} -> {}", pendingBefore, after);
+                    } else {
+                        Alquimia.LOGGER.error("[AutoTest] FALLO remover: el camino no avanzó ({} -> {})", pendingBefore, after);
+                    }
+                }
+                pressButton(mc, "gui.alquimia.bottle");
+                next(25);
+            }
+            case 12 -> {
+                int potions = 0;
+                if (mc.player.containerMenu instanceof CauldronMenu menu) {
+                    for (int i = 0; i < AlchemicalCauldronBlockEntity.OUTPUTS; i++) {
+                        if (menu.getSlot(AlchemicalCauldronBlockEntity.SLOT_OUTPUT + i).getItem().is(ModItems.ALCHEMICAL_POTION.get())) potions++;
+                    }
+                }
+                if (potions == 3) Alquimia.LOGGER.info("[AutoTest] OK embotellar: 3 elixires");
+                else Alquimia.LOGGER.error("[AutoTest] FALLO embotellar: {} elixires en la salida", potions);
+                hoverSlotWithItem(mc, ModItems.ALCHEMICAL_POTION.get());
+                next(15);
+            }
+            case 13 -> {
+                shot(mc, "03b_embotellado");
                 onServer(mc, sp -> {
                     PlayerKnowledge k = AlchemyKnowledge.get(sp.server).of(sp.getUUID());
                     for (AlchemyMap m : AlchemyData.server().maps()) {
@@ -185,32 +222,32 @@ public final class AutoTest {
                 setMouse(mc, 5, 5);
                 next(30);
             }
-            case 10 -> {
+            case 14 -> {
                 shot(mc, "04_mapa_revelado");
                 mc.player.closeContainer();
                 mc.setScreen(new GrimoireScreen(mc.level.dimension().location()));
                 setMouse(mc, 5, 5);
                 next(30);
             }
-            case 11 -> {
+            case 15 -> {
                 shot(mc, "05_grimorio_esencias");
                 pressButton(mc, "gui.alquimia.grimoire.ingredients");
                 next(10);
             }
-            case 12 -> {
+            case 16 -> {
                 if (mc.screen != null) {
                     int left = (mc.screen.width - 300) / 2, top = (mc.screen.height - 190) / 2;
                     setMouse(mc, left + 158 + 9 + 21 * 2, top + 40 + 9 + 21);
                 }
                 next(20);
             }
-            case 13 -> {
+            case 17 -> {
                 shot(mc, "06_grimorio_ingredientes");
                 mc.setScreen(ClientSetup.createConfigScreen(null));
                 setMouse(mc, 5, 5);
                 next(30);
             }
-            case 14 -> {
+            case 18 -> {
                 shot(mc, "07_configuracion");
                 mc.setScreen(null);
                 onServer(mc, sp -> {
@@ -219,11 +256,11 @@ public final class AutoTest {
                 });
                 next(40);
             }
-            case 15 -> {
+            case 19 -> {
                 hoverSlotWithItem(mc, ModItems.ALCHEMICAL_POTION.get());
                 next(20);
             }
-            case 16 -> {
+            case 20 -> {
                 shot(mc, "08_objetos");
                 Alquimia.LOGGER.info("[AutoTest] Listo: {} capturas", shots);
                 mc.stop();
