@@ -148,7 +148,8 @@ jobs:
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A builds docs/screenshots 2>/dev/null || true
+          [ -d builds ] && git add -A builds
+          [ -d docs/screenshots ] && git add -A docs/screenshots
           if git diff --cached --quiet; then echo "Nada para publicar"; exit 0; fi
           git commit -m "CI: publicar .jar y capturas (${GITHUB_SHA::7})"
           for i in 1 2 3 4; do git pull --rebase -q && git push -q && exit 0; sleep $((i*5)); done

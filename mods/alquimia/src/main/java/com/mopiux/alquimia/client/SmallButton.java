@@ -23,6 +23,7 @@ public class SmallButton extends Button {
         g.fill(getX(), getY(), getX() + width, getY() + height, 0xFF3A2816);
         g.fill(getX() + 1, getY() + 1, getX() + width - 1, getY() + height - 1, bg);
         float r = ((tint >> 16) & 0xFF) / 255f, gg = ((tint >> 8) & 0xFF) / 255f, b = (tint & 0xFF) / 255f;
+        Draw2D.alphaBlend();
         g.setColor(r, gg, b, 1f);
         g.blit(AlchemyMapView.ICONS, getX() + (width - 7) / 2, getY() + (height - 7) / 2, iconU, iconV, 7, 7,
                 AlchemyMapView.ICONS_SIZE, AlchemyMapView.ICONS_SIZE);

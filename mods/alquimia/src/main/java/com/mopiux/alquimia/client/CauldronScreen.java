@@ -401,6 +401,7 @@ public class CauldronScreen extends AbstractContainerScreen<CauldronMenu> {
 
     @Override
     protected void renderBg(GuiGraphics g, float partial, int mouseX, int mouseY) {
+        Draw2D.alphaBlend();
         g.blit(BG, leftPos, topPos, 0f, 0f, imageWidth, imageHeight, TEX_W, TEX_H);
         // Íconos fantasma en las ranuras vacías
         ghost(g, AlchemicalCauldronBlockEntity.SLOT_INGREDIENT, CauldronMenu.INGREDIENT_X, 0);
@@ -419,8 +420,8 @@ public class CauldronScreen extends AbstractContainerScreen<CauldronMenu> {
 
     private void ghost(GuiGraphics g, int slot, int x, int u) {
         if (!slotItem(slot).isEmpty()) return;
+        Draw2D.alphaBlend();
         g.setColor(1f, 1f, 1f, 0.35f);
-        com.mojang.blaze3d.systems.RenderSystem.enableBlend();
         g.blit(AlchemyMapView.ICONS, leftPos + x, topPos + CauldronMenu.SLOTS_Y, u, 32, 16, 16,
                 AlchemyMapView.ICONS_SIZE, AlchemyMapView.ICONS_SIZE);
         g.setColor(1f, 1f, 1f, 1f);
@@ -488,6 +489,7 @@ public class CauldronScreen extends AbstractContainerScreen<CauldronMenu> {
         g.drawString(font, playerInventoryTitle, inventoryLabelX, inventoryLabelY, 0x404040, false);
 
         BrewState b = menu.brew();
+        Draw2D.alphaBlend();
         // Agua
         g.drawString(font, Component.translatable("gui.alquimia.water"), PANEL_X, 42, 0x404040, false);
         for (int i = 0; i < BrewState.MAX_WATER; i++) {

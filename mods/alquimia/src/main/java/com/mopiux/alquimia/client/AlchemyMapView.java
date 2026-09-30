@@ -289,6 +289,7 @@ public class AlchemyMapView {
         Draw2D.end(b);
 
         // Íconos
+        Draw2D.alphaBlend();
         for (AlchemyMap.Zone z : map.zones()) {
             float zx = sx(z.x()), zy = sy(z.y()), zr = z.radius() * zoom;
             if (!onScreen(zx, zy, zr)) continue;

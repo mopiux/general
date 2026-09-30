@@ -9,12 +9,17 @@ setblock 0 100 0 alquimia:alchemical_cauldron
 setblock 2 100 0 alquimia:mortar[facing=east]
 data get block 0 100 0
 #expect has the following block data
+fill -4 36 -4 4 44 4 minecraft:stone
+fill -4 16 -4 4 24 4 minecraft:stone
 place feature alquimia:salt_ore 0 40 0
 place feature alquimia:cinnabar_ore 0 20 0
 #expect Placed .*salt_ore
+#expect Placed .*cinnabar_ore
 execute in minecraft:the_nether run forceload add 0 0
 #wait 3
+execute in minecraft:the_nether run fill -4 56 -4 4 64 4 minecraft:netherrack
 execute in minecraft:the_nether run place feature alquimia:nether_sulfur_ore 0 60 0
+#expect Placed .*nether_sulfur_ore
 loot spawn 0 101 0 loot alquimia:blocks/salt_ore
 loot spawn 0 101 0 loot alquimia:blocks/nether_sulfur_ore
 #expect Dropped [0-9]+

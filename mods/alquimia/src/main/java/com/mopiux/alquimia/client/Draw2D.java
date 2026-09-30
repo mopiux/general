@@ -32,7 +32,13 @@ public final class Draw2D {
         BufferUploader.drawWithShader(b.end());
         RenderSystem.enableDepthTest();
         RenderSystem.enableCull();
-        RenderSystem.disableBlend();
+        alphaBlend();
+    }
+
+    /** Activa la mezcla alfa estándar (necesaria para dibujar íconos con transparencia). */
+    public static void alphaBlend() {
+        RenderSystem.enableBlend();
+        RenderSystem.defaultBlendFunc();
     }
 
     private static void v(BufferBuilder b, Matrix4f m, float x, float y, int argb) {

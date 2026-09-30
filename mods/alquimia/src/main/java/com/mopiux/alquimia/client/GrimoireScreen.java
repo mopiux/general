@@ -107,6 +107,7 @@ public class GrimoireScreen extends Screen {
     @Override
     public void render(GuiGraphics g, int mouseX, int mouseY, float partial) {
         renderBackground(g);
+        Draw2D.alphaBlend();
         g.blit(BG, left, top, 0f, 0f, W, H, 512, 256);
         AlchemyMap map = map();
         PlayerKnowledge k = ClientAccess.knowledge();
@@ -138,6 +139,7 @@ public class GrimoireScreen extends Screen {
     }
 
     private void renderEssences(GuiGraphics g, AlchemyMap map, PlayerKnowledge k, int mouseX, int mouseY, List<Component> tooltip) {
+        Draw2D.alphaBlend();
         List<AlchemyMap.Zone> zones = new ArrayList<>(map.zones());
         zones.sort(Comparator.comparingDouble(z -> z.x() * z.x() + z.y() * z.y()));
         int discovered = 0;
@@ -175,6 +177,7 @@ public class GrimoireScreen extends Screen {
     }
 
     private void renderIngredients(GuiGraphics g, PlayerKnowledge k, int mouseX, int mouseY, List<Component> tooltip) {
+        Draw2D.alphaBlend();
         List<AlchemyIngredient> list = AlchemyData.get(true).ingredients();
         int known = 0;
         for (AlchemyIngredient i : list) if (k.ingredients().contains(i.id())) known++;
