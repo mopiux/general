@@ -98,7 +98,7 @@ public class MortarBlock extends BaseEntityBlock {
             AlchemyIngredient ing = AlchemyData.get(level).find(held);
             if (ing == null) {
                 // No es un ingrediente: dejar que el ítem haga lo suyo (por ejemplo, colocar un bloque al lado)
-                if (inside.isEmpty() && !level.isClientSide && held.getItem() instanceof net.minecraft.world.item.BlockItem == false) {
+                if (inside.isEmpty() && !level.isClientSide && !(held.getItem() instanceof net.minecraft.world.item.BlockItem)) {
                     player.displayClientMessage(Component.translatable("message.alquimia.mortar.not_ingredient"), true);
                 }
                 return InteractionResult.PASS;
