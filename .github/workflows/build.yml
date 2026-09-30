@@ -1,0 +1,155 @@
+name: Build
+
+on:
+  push:
+    paths:
+      - 'mods/**'
+      - 'tools/ci/**'
+      - 'gradle/**'
+      - '.github/workflows/build.yml'
+  workflow_dispatch:
+    inputs:
+      publish:
+        description: 'Guardar los .jar compilados en builds/ (commit al branch)'
+        type: boolean
+        default: false
+      screenshots:
+        description: 'Abrir el cliente con Xvfb y guardar capturas en docs/screenshots'
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: build-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Compilar ${{ matrix.mod }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        mod: [alquimia, lenguaperdida, planetoides]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          cache-read-only: false
+      - name: Compilar
+        run: |
+          chmod +x gradlew
+          ./gradlew -p mods/${{ matrix.mod }} build --stacktrace --no-daemon
+      - uses: actions/upload-artifact@v4
+        with:
+          name: jar-${{ matrix.mod }}
+          path: mods/${{ matrix.mod }}/build/libs/*.jar
+          if-no-files-found: error
+
+  smoke:
+    name: Servidor dedicado con los 3 mods
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: jar-*
+          path: jars
+          merge-multiple: true
+      - name: Arrancar servidor y generar el mundo
+        run: bash tools/ci/smoke_server.sh "$PWD/jars"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: smoke-logs
+          path: |
+            smoke/logs/
+            smoke/crash-reports/
+          if-no-files-found: ignore
+
+  screenshots:
+    name: Capturas del cliente (${{ matrix.mod }})
+    if: github.event_name == 'workflow_dispatch' && inputs.screenshots
+    needs: build
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        mod: [alquimia, lenguaperdida, planetoides]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          cache-read-only: false
+      - name: Dependencias gráficas
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq xvfb mesa-utils libgl1-mesa-dri > /dev/null
+      - name: Cliente automático
+        run: bash tools/ci/client_screenshots.sh ${{ matrix.mod }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: screenshots-${{ matrix.mod }}
+          path: shots/
+          if-no-files-found: ignore
+
+  publish:
+    name: Publicar capturas y .jar en el repo
+    if: always() && github.event_name == 'workflow_dispatch' && (inputs.publish || inputs.screenshots) && needs.build.result == 'success'
+    needs: [build, smoke, screenshots]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref }}
+      - uses: actions/download-artifact@v4
+        if: inputs.publish
+        with:
+          pattern: jar-*
+          path: jars
+          merge-multiple: true
+      - uses: actions/download-artifact@v4
+        if: inputs.screenshots
+        with:
+          pattern: screenshots-*
+          path: shots
+      - name: Commit
+        env:
+          PUBLISH: ${{ inputs.publish }}
+          SHOTS: ${{ inputs.screenshots }}
+          SMOKE: ${{ needs.smoke.result }}
+        run: |
+          set -e
+          if [ "$PUBLISH" = "true" ]; then
+            if [ "$SMOKE" != "success" ]; then echo "La prueba de servidor falló: no publico los .jar"; exit 1; fi
+            mkdir -p builds && rm -f builds/*.jar && cp jars/*.jar builds/
+            (cd builds && sha256sum *.jar > SHA256SUMS.txt)
+          fi
+          if [ "$SHOTS" = "true" ] && [ -d shots ]; then
+            for d in shots/screenshots-*; do
+              mod=${d#shots/screenshots-}
+              mkdir -p docs/screenshots/$mod && rm -f docs/screenshots/$mod/*.png
+              cp $d/*.png docs/screenshots/$mod/ 2>/dev/null || true
+            done
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A builds docs/screenshots 2>/dev/null || true
+          if git diff --cached --quiet; then echo "Nada para publicar"; exit 0; fi
+          git commit -m "CI: publicar .jar y capturas (${GITHUB_SHA::7})"
+          for i in 1 2 3 4; do git pull --rebase -q && git push -q && exit 0; sleep $((i*5)); done
+          exit 1

@@ -1,0 +1,21 @@
+# Gradle / IDE
+.gradle/
+build/
+out/
+run/
+run-data/
+runs/
+*.iml
+.idea/
+.vscode/
+.classpath
+.project
+.settings/
+bin/
+logs/
+# Python
+__pycache__/
+*.pyc
+# OS
+.DS_Store
+Thumbs.db

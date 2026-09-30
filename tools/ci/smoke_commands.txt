@@ -1,0 +1,7 @@
+# Comandos que se envían a la consola del servidor de prueba.
+# "#wait N" espera N segundos.
+#wait 5
+list
+#wait 2
+save-all flush
+#wait 5

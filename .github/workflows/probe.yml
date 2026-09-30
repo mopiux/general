@@ -1,0 +1,39 @@
+name: Probe
+
+# Herramienta de desarrollo: prepara el entorno de Forge y ejecuta un script
+# (por ejemplo, para consultar firmas de métodos con javap).
+on:
+  workflow_dispatch:
+    inputs:
+      mod:
+        description: 'Proyecto donde preparar el entorno'
+        type: string
+        default: 'alquimia'
+      script:
+        description: 'Script bash a ejecutar'
+        type: string
+        required: true
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          cache-read-only: false
+      - name: Preparar entorno Forge
+        run: |
+          chmod +x gradlew
+          ./gradlew -p mods/${{ inputs.mod }} compileJava --no-daemon -q || true
+      - name: Script
+        env:
+          SCRIPT: ${{ inputs.script }}
+        run: bash -c "$SCRIPT"

@@ -1,0 +1,12 @@
+{
+  "required": true,
+  "minVersion": "0.8.5",
+  "package": "com.mopiux.planetoides.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "refmap": "planetoides.refmap.json",
+  "mixins": [],
+  "client": [],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
