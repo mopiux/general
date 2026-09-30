@@ -52,6 +52,7 @@ Idiomas: español (con voseo para Argentina y Uruguay) e inglés.
 | | |
 |---|---|
 | ![Laboratorio](docs/screenshots/alquimia/01_laboratorio.png) | ![Menas](docs/screenshots/alquimia/02_menas_y_bloques.png) |
+| ![Elixires embotellados](docs/screenshots/alquimia/03b_embotellado.png) | ![Mena natural en una cueva](docs/screenshots/alquimia/09_mena_natural.png) |
 | ![Mapa revelado](docs/screenshots/alquimia/04_mapa_revelado.png) | ![Grimorio](docs/screenshots/alquimia/05_grimorio_esencias.png) |
 
 ## Compilar
