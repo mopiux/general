@@ -1,7 +1,25 @@
 # Comandos que se envían a la consola del servidor de prueba.
-# "#wait N" espera N segundos.
-#wait 5
-list
+# "#wait N" espera N segundos; "#expect REGEX" exige que el log contenga esa expresión.
+#expect Alquimia: 3 mapas y [0-9]+ ingredientes cargados
+#wait 3
+forceload add 0 0
 #wait 2
+setblock 0 99 0 minecraft:campfire
+setblock 0 100 0 alquimia:alchemical_cauldron
+setblock 2 100 0 alquimia:mortar[facing=east]
+data get block 0 100 0
+#expect has the following block data
+place feature alquimia:salt_ore 0 40 0
+place feature alquimia:cinnabar_ore 0 20 0
+#expect Placed .*salt_ore
+execute in minecraft:the_nether run forceload add 0 0
+#wait 3
+execute in minecraft:the_nether run place feature alquimia:nether_sulfur_ore 0 60 0
+loot spawn 0 101 0 loot alquimia:blocks/salt_ore
+loot spawn 0 101 0 loot alquimia:blocks/nether_sulfur_ore
+#expect Dropped [0-9]+
+reload
+#wait 5
+#expect Alquimia: 3 mapas
 save-all flush
 #wait 5

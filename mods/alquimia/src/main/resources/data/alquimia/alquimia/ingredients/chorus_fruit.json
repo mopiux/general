@@ -1,0 +1,9 @@
+{
+  "ingredient": {
+    "item": "minecraft:chorus_fruit"
+  },
+  "transform": {
+    "type": "rotate",
+    "angle": 90
+  }
+}

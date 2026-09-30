@@ -1,0 +1,27 @@
+{
+  "display": {
+    "icon": {
+      "item": "alquimia:alchemical_potion"
+    },
+    "title": {
+      "translate": "advancements.alquimia.first_elixir.title"
+    },
+    "description": {
+      "translate": "advancements.alquimia.first_elixir.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "b": {
+      "trigger": "alquimia:alchemy",
+      "conditions": {
+        "event": "bottle",
+        "min": 1
+      }
+    }
+  },
+  "parent": "alquimia:first_essence"
+}

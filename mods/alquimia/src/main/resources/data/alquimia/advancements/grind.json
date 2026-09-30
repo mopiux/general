@@ -1,0 +1,27 @@
+{
+  "display": {
+    "icon": {
+      "item": "alquimia:mortar"
+    },
+    "title": {
+      "translate": "advancements.alquimia.grind.title"
+    },
+    "description": {
+      "translate": "advancements.alquimia.grind.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "g": {
+      "trigger": "alquimia:alchemy",
+      "conditions": {
+        "event": "grind",
+        "min": 1
+      }
+    }
+  },
+  "parent": "alquimia:cauldron"
+}

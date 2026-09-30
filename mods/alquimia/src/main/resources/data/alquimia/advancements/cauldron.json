@@ -1,0 +1,32 @@
+{
+  "display": {
+    "icon": {
+      "item": "alquimia:alchemical_cauldron"
+    },
+    "title": {
+      "translate": "advancements.alquimia.cauldron.title"
+    },
+    "description": {
+      "translate": "advancements.alquimia.cauldron.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "c": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "alquimia:alchemical_cauldron"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "parent": "alquimia:root"
+}

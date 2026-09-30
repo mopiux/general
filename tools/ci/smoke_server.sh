@@ -45,6 +45,7 @@ if wait_for 'Done (' 600; then
     [ -z "$line" ] && continue
     case "$line" in
       \#wait*) sleep "${line#\#wait }";;
+      \#expect*) ;;
       \#*) ;;
       *) echo ">> $line"; echo "$line" >&3; sleep 1;;
     esac
@@ -67,4 +68,13 @@ if grep -nE "Exception|Caused by|\[ERROR\]|/ERROR\]|FATAL" server.out | grep -vE
   echo "!!! Se encontraron errores en el log"; status=1
 fi
 grep -q 'Done (' server.out || status=1
+
+# Líneas que tienen que aparecer en el log ("#expect <regex>" en smoke_commands.txt)
+while IFS= read -r line || [ -n "$line" ]; do
+  case "$line" in
+    \#expect*)
+      pattern="${line#\#expect }"
+      if grep -qE "$pattern" server.out; then echo "OK   esperado: $pattern"; else echo "FALTA esperado: $pattern"; status=1; fi;;
+  esac
+done < "$ROOT/tools/ci/smoke_commands.txt"
 exit $status

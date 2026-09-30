@@ -1,0 +1,9 @@
+{
+  "ingredient": {
+    "item": "minecraft:amethyst_shard"
+  },
+  "transform": {
+    "type": "scale",
+    "factor": 0.5
+  }
+}

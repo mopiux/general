@@ -1,0 +1,8 @@
+{
+  "ingredient": {
+    "item": "minecraft:ender_pearl"
+  },
+  "transform": {
+    "type": "mirror"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "display": {
+    "icon": {
+      "item": "alquimia:salt"
+    },
+    "title": {
+      "translate": "advancements.alquimia.first_essence.title"
+    },
+    "description": {
+      "translate": "advancements.alquimia.first_essence.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "f": {
+      "trigger": "alquimia:alchemy",
+      "conditions": {
+        "event": "fix",
+        "min": 1
+      }
+    }
+  },
+  "parent": "alquimia:cauldron"
+}

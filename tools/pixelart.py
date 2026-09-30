@@ -362,3 +362,44 @@ def ore_overlay(colors: Sequence, seed: int, embed, clusters=6, shapes=None, spa
 
 def upscale(img: Image.Image, f: int) -> Image.Image:
     return img.resize((img.width * f, img.height * f), Image.NEAREST)
+
+
+def voronoi_crystals(palette, seed, cells=9, edge=None, w=16, h=16, light_dir=(-0.6, -0.8)):
+    """Textura cristalina repetible: celdas de Voronoi con una cara plana iluminada cada una
+    y bordes finos. palette va de oscuro a claro."""
+    rng = random.Random(seed)
+    pts = [(rng.uniform(0, w), rng.uniform(0, h)) for _ in range(cells)]
+    normals = []
+    for _ in pts:
+        a = rng.uniform(0, math.pi * 2)
+        normals.append((math.cos(a), math.sin(a), rng.uniform(0.3, 1.0)))
+    img = new(w, h)
+    px = img.load()
+    owner = [[0] * w for _ in range(h)]
+    for y in range(h):
+        for x in range(w):
+            best, second, bi = 1e9, 1e9, 0
+            for i, (cx, cy) in enumerate(pts):
+                dx = min(abs(x + 0.5 - cx), w - abs(x + 0.5 - cx))
+                dy = min(abs(y + 0.5 - cy), h - abs(y + 0.5 - cy))
+                d = dx * dx + dy * dy
+                if d < best:
+                    second, best, bi = best, d, i
+                elif d < second:
+                    second = d
+            owner[y][x] = bi
+            nx, ny, nz = normals[bi]
+            lum = 0.55 + 0.45 * (nx * light_dir[0] + ny * light_dir[1]) * (1 - nz * 0.5)
+            lum += (rng.random() - 0.5) * 0.08
+            n = len(palette)
+            px[x, y] = hex2rgba(palette[int(max(0, min(n - 1, round(lum * (n - 1)))))])
+    if edge:
+        e = hex2rgba(edge)
+        out = img.copy()
+        op = out.load()
+        for y in range(h):
+            for x in range(w):
+                if owner[y][x] != owner[y][(x + 1) % w] or owner[y][x] != owner[(y + 1) % h][x]:
+                    op[x, y] = e
+        img = out
+    return img

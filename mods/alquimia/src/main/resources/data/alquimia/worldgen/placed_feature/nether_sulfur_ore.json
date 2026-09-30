@@ -1,0 +1,27 @@
+{
+  "feature": "alquimia:nether_sulfur_ore",
+  "placement": [
+    {
+      "type": "alquimia:config_count",
+      "key": "sulfur"
+    },
+    {
+      "type": "minecraft:in_square"
+    },
+    {
+      "type": "minecraft:height_range",
+      "height": {
+        "type": "minecraft:uniform",
+        "min_inclusive": {
+          "above_bottom": 10
+        },
+        "max_inclusive": {
+          "below_top": 10
+        }
+      }
+    },
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

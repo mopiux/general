@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "alquimia:item/alchemical_lingering_potion_overlay",
+    "layer1": "alquimia:item/alchemical_lingering_potion"
+  }
+}

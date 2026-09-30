@@ -1,0 +1,164 @@
+{
+  "dimensions": [
+    "minecraft:the_end"
+  ],
+  "radius": 100,
+  "zones": [
+    {
+      "effect": "minecraft:levitation",
+      "x": 0.0,
+      "y": 30.0,
+      "radius": 8,
+      "duration": 200,
+      "max_amplifier": 1
+    },
+    {
+      "effect": "minecraft:slow_falling",
+      "x": -0.0,
+      "y": -30.0,
+      "radius": 8,
+      "duration": 2400,
+      "max_amplifier": 2
+    },
+    {
+      "effect": "minecraft:night_vision",
+      "x": -35.0,
+      "y": 0.0,
+      "radius": 7,
+      "duration": 4800,
+      "max_amplifier": 2
+    },
+    {
+      "effect": "minecraft:invisibility",
+      "x": 40.0,
+      "y": 0.0,
+      "radius": 7,
+      "duration": 3600,
+      "max_amplifier": 2
+    },
+    {
+      "effect": "minecraft:speed",
+      "x": 38.9,
+      "y": 38.9,
+      "radius": 6,
+      "duration": 3600,
+      "max_amplifier": 2
+    },
+    {
+      "effect": "minecraft:jump_boost",
+      "x": -38.9,
+      "y": 38.9,
+      "radius": 6,
+      "duration": 3600,
+      "max_amplifier": 2
+    },
+    {
+      "effect": "minecraft:glowing",
+      "x": -38.9,
+      "y": -38.9,
+      "radius": 6,
+      "duration": 3600,
+      "max_amplifier": 2
+    },
+    {
+      "effect": "minecraft:darkness",
+      "x": 38.9,
+      "y": -38.9,
+      "radius": 6,
+      "duration": 400,
+      "max_amplifier": 0
+    },
+    {
+      "effect": "minecraft:resistance",
+      "x": 80.0,
+      "y": 0.0,
+      "radius": 5,
+      "duration": 1800,
+      "max_amplifier": 2
+    },
+    {
+      "effect": "minecraft:absorption",
+      "x": 0.0,
+      "y": 80.0,
+      "radius": 5,
+      "duration": 2400,
+      "max_amplifier": 2
+    },
+    {
+      "effect": "minecraft:regeneration",
+      "x": -80.0,
+      "y": 0.0,
+      "radius": 5,
+      "duration": 900,
+      "max_amplifier": 2
+    },
+    {
+      "effect": "minecraft:luck",
+      "x": -0.0,
+      "y": -80.0,
+      "radius": 5,
+      "duration": 6000,
+      "max_amplifier": 2
+    },
+    {
+      "effect": "minecraft:health_boost",
+      "x": 63.6,
+      "y": 63.6,
+      "radius": 5,
+      "duration": 2400,
+      "max_amplifier": 2
+    }
+  ],
+  "hazards": [
+    {
+      "x": 25,
+      "y": 25,
+      "radius": 5
+    },
+    {
+      "x": -25,
+      "y": 25,
+      "radius": 5
+    },
+    {
+      "x": -25,
+      "y": -25,
+      "radius": 5
+    },
+    {
+      "x": 25,
+      "y": -25,
+      "radius": 5
+    },
+    {
+      "x": 0,
+      "y": 60,
+      "radius": 6
+    },
+    {
+      "x": 60,
+      "y": 0,
+      "radius": 6
+    },
+    {
+      "x": 0,
+      "y": -60,
+      "radius": 6
+    },
+    {
+      "x": -60,
+      "y": 0,
+      "radius": 6
+    },
+    {
+      "x": 42,
+      "y": 70,
+      "radius": 5
+    },
+    {
+      "x": -60,
+      "y": -60,
+      "radius": 5
+    }
+  ]
+}

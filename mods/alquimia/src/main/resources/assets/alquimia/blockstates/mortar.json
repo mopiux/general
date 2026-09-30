@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "alquimia:block/mortar"
+    },
+    "facing=east": {
+      "model": "alquimia:block/mortar",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "alquimia:block/mortar",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "alquimia:block/mortar",
+      "y": 270
+    }
+  }
+}

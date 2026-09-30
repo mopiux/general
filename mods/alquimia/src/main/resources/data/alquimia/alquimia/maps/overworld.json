@@ -1,0 +1,347 @@
+{
+  "dimensions": [
+    "minecraft:overworld"
+  ],
+  "fallback": true,
+  "radius": 120,
+  "zones": [
+    {
+      "effect": "minecraft:speed",
+      "x": 17.2,
+      "y": 24.6,
+      "radius": 7,
+      "duration": 3600,
+      "max_amplifier": 2
+    },
+    {
+      "effect": "minecraft:jump_boost",
+      "x": -18.4,
+      "y": 26.2,
+      "radius": 7,
+      "duration": 3600,
+      "max_amplifier": 2
+    },
+    {
+      "effect": "minecraft:night_vision",
+      "x": -29.0,
+      "y": -7.8,
+      "radius": 7,
+      "duration": 3600,
+      "max_amplifier": 2
+    },
+    {
+      "effect": "minecraft:fire_resistance",
+      "x": 29.0,
+      "y": -13.5,
+      "radius": 7,
+      "duration": 3600,
+      "max_amplifier": 2
+    },
+    {
+      "effect": "minecraft:water_breathing",
+      "x": -3.0,
+      "y": -33.9,
+      "radius": 7,
+      "duration": 3600,
+      "max_amplifier": 2
+    },
+    {
+      "effect": "minecraft:slowness",
+      "x": 37.4,
+      "y": 6.6,
+      "radius": 6,
+      "duration": 1800,
+      "max_amplifier": 2
+    },
+    {
+      "effect": "minecraft:poison",
+      "x": -25.5,
+      "y": -25.5,
+      "radius": 6,
+      "duration": 900,
+      "max_amplifier": 2
+    },
+    {
+      "effect": "minecraft:weakness",
+      "x": -3.5,
+      "y": 39.8,
+      "radius": 6,
+      "duration": 1800,
+      "max_amplifier": 2
+    },
+    {
+      "effect": "minecraft:strength",
+      "x": 47.5,
+      "y": 39.9,
+      "radius": 7,
+      "duration": 3600,
+      "max_amplifier": 2
+    },
+    {
+      "effect": "minecraft:regeneration",
+      "x": -52.0,
+      "y": 30.0,
+      "radius": 7,
+      "duration": 900,
+      "max_amplifier": 2
+    },
+    {
+      "effect": "minecraft:invisibility",
+      "x": -12.2,
+      "y": 68.9,
+      "radius": 7,
+      "duration": 3600,
+      "max_amplifier": 2
+    },
+    {
+      "effect": "minecraft:haste",
+      "x": 55.4,
+      "y": -32.0,
+      "radius": 7,
+      "duration": 3600,
+      "max_amplifier": 2
+    },
+    {
+      "effect": "minecraft:slow_falling",
+      "x": -53.7,
+      "y": -31.0,
+      "radius": 7,
+      "duration": 1800,
+      "max_amplifier": 2
+    },
+    {
+      "effect": "minecraft:resistance",
+      "x": 16.6,
+      "y": -61.8,
+      "radius": 7,
+      "duration": 1800,
+      "max_amplifier": 2
+    },
+    {
+      "effect": "minecraft:luck",
+      "x": -24.6,
+      "y": -67.7,
+      "radius": 6,
+      "duration": 6000,
+      "max_amplifier": 2
+    },
+    {
+      "effect": "minecraft:absorption",
+      "x": 69.7,
+      "y": 6.1,
+      "radius": 6,
+      "duration": 2400,
+      "max_amplifier": 2
+    },
+    {
+      "effect": "minecraft:instant_health",
+      "x": -71.7,
+      "y": 6.3,
+      "radius": 6,
+      "duration": 1,
+      "max_amplifier": 1
+    },
+    {
+      "effect": "minecraft:hunger",
+      "x": 14.5,
+      "y": 54.1,
+      "radius": 6,
+      "duration": 900,
+      "max_amplifier": 2
+    },
+    {
+      "effect": "minecraft:nausea",
+      "x": 27.5,
+      "y": -39.3,
+      "radius": 6,
+      "duration": 600,
+      "max_amplifier": 2
+    },
+    {
+      "effect": "minecraft:mining_fatigue",
+      "x": -24.0,
+      "y": -41.6,
+      "radius": 6,
+      "duration": 1200,
+      "max_amplifier": 2
+    },
+    {
+      "effect": "minecraft:blindness",
+      "x": -29.8,
+      "y": 42.6,
+      "radius": 6,
+      "duration": 600,
+      "max_amplifier": 2
+    },
+    {
+      "effect": "minecraft:glowing",
+      "x": 48.9,
+      "y": 17.8,
+      "radius": 6,
+      "duration": 3600,
+      "max_amplifier": 2
+    },
+    {
+      "effect": "minecraft:health_boost",
+      "x": 47.5,
+      "y": 82.3,
+      "radius": 6,
+      "duration": 2400,
+      "max_amplifier": 2
+    },
+    {
+      "effect": "minecraft:saturation",
+      "x": -86.5,
+      "y": 31.5,
+      "radius": 6,
+      "duration": 1,
+      "max_amplifier": 1
+    },
+    {
+      "effect": "minecraft:conduit_power",
+      "x": 33.5,
+      "y": -92.1,
+      "radius": 6,
+      "duration": 3600,
+      "max_amplifier": 2
+    },
+    {
+      "effect": "minecraft:dolphins_grace",
+      "x": -42.3,
+      "y": -90.6,
+      "radius": 6,
+      "duration": 1200,
+      "max_amplifier": 1
+    },
+    {
+      "effect": "minecraft:hero_of_the_village",
+      "x": -26.9,
+      "y": 100.5,
+      "radius": 5,
+      "duration": 6000,
+      "max_amplifier": 1
+    },
+    {
+      "effect": "minecraft:levitation",
+      "x": -92.1,
+      "y": -33.5,
+      "radius": 5,
+      "duration": 200,
+      "max_amplifier": 1
+    },
+    {
+      "effect": "minecraft:wither",
+      "x": 90.2,
+      "y": -32.8,
+      "radius": 5,
+      "duration": 400,
+      "max_amplifier": 1
+    },
+    {
+      "effect": "minecraft:darkness",
+      "x": -0.0,
+      "y": -110.0,
+      "radius": 5,
+      "duration": 400,
+      "max_amplifier": 0
+    },
+    {
+      "effect": "minecraft:instant_damage",
+      "x": 96.6,
+      "y": 25.9,
+      "radius": 5,
+      "duration": 1,
+      "max_amplifier": 1
+    },
+    {
+      "effect": "minecraft:unluck",
+      "x": -62.2,
+      "y": 62.2,
+      "radius": 5,
+      "duration": 6000,
+      "max_amplifier": 0
+    }
+  ],
+  "hazards": [
+    {
+      "x": 42,
+      "y": 28,
+      "radius": 5
+    },
+    {
+      "x": -38,
+      "y": 16,
+      "radius": 5
+    },
+    {
+      "x": 14,
+      "y": -48,
+      "radius": 5
+    },
+    {
+      "x": -44,
+      "y": -48,
+      "radius": 6
+    },
+    {
+      "x": 60,
+      "y": -10,
+      "radius": 5
+    },
+    {
+      "x": -8,
+      "y": 55,
+      "radius": 5
+    },
+    {
+      "x": 70,
+      "y": 60,
+      "radius": 6
+    },
+    {
+      "x": -70,
+      "y": -60,
+      "radius": 6
+    },
+    {
+      "x": 80,
+      "y": -60,
+      "radius": 6
+    },
+    {
+      "x": -78,
+      "y": 48,
+      "radius": 6
+    },
+    {
+      "x": 5,
+      "y": 88,
+      "radius": 6
+    },
+    {
+      "x": -5,
+      "y": -80,
+      "radius": 6
+    },
+    {
+      "x": 100,
+      "y": -5,
+      "radius": 5
+    },
+    {
+      "x": -100,
+      "y": 0,
+      "radius": 5
+    },
+    {
+      "x": 38,
+      "y": 72,
+      "radius": 4
+    },
+    {
+      "x": -40,
+      "y": 84,
+      "radius": 4
+    }
+  ]
+}

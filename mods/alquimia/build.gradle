@@ -15,6 +15,15 @@ java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
 println "Java: ${System.getProperty 'java.version'}, JVM: ${System.getProperty 'java.vm.version'} (${System.getProperty 'java.vendor'}), Arch: ${System.getProperty 'os.arch'}"
 
+// Código de pruebas automáticas del cliente: solo se usa en desarrollo (no va en el .jar)
+sourceSets {
+    autotest {
+        java.srcDir 'src/autotest/java'
+        compileClasspath += sourceSets.main.output + sourceSets.main.compileClasspath
+        runtimeClasspath += sourceSets.main.output + sourceSets.main.runtimeClasspath
+    }
+}
+
 minecraft {
     mappings channel: mapping_channel, version: mapping_version
     copyIdeResources = true
@@ -28,12 +37,18 @@ minecraft {
             mods {
                 "${mod_id}" {
                     source sourceSets.main
+                    source sourceSets.autotest
                 }
             }
         }
 
         client {
             property 'forge.enabledGameTestNamespaces', mod_id
+            // Prueba automática con capturas: ./gradlew runClient -Pautotest
+            if (project.hasProperty('autotest')) {
+                property 'alquimia.autotest', 'true'
+                args '--width', '1280', '--height', '720'
+            }
         }
 
         server {
@@ -87,6 +102,10 @@ tasks.named('jar', Jar).configure {
         ])
     }
     finalizedBy 'reobfJar'
+}
+
+afterEvaluate {
+    tasks.matching { it.name == 'runClient' }.configureEach { dependsOn 'autotestClasses' }
 }
 
 tasks.withType(JavaCompile).configureEach {

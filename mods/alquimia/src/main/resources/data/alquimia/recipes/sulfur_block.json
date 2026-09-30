@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "alquimia:sulfur"
+    }
+  },
+  "result": {
+    "item": "alquimia:sulfur_block",
+    "count": 1
+  }
+}

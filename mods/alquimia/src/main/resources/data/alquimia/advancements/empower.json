@@ -1,0 +1,27 @@
+{
+  "display": {
+    "icon": {
+      "item": "alquimia:sulfur"
+    },
+    "title": {
+      "translate": "advancements.alquimia.empower.title"
+    },
+    "description": {
+      "translate": "advancements.alquimia.empower.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "e": {
+      "trigger": "alquimia:alchemy",
+      "conditions": {
+        "event": "empower",
+        "min": 1
+      }
+    }
+  },
+  "parent": "alquimia:first_essence"
+}

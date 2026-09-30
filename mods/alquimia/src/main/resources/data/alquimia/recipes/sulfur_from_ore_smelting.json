@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "ingredient": {
+    "item": "alquimia:nether_sulfur_ore"
+  },
+  "result": "alquimia:sulfur",
+  "experience": 0.3,
+  "cookingtime": 200
+}

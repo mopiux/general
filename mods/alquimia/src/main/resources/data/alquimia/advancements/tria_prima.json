@@ -1,0 +1,42 @@
+{
+  "display": {
+    "icon": {
+      "item": "alquimia:quicksilver"
+    },
+    "title": {
+      "translate": "advancements.alquimia.tria_prima.title"
+    },
+    "description": {
+      "translate": "advancements.alquimia.tria_prima.description"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "t": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "alquimia:salt"
+            ]
+          },
+          {
+            "items": [
+              "alquimia:quicksilver"
+            ]
+          },
+          {
+            "items": [
+              "alquimia:sulfur"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "parent": "alquimia:root"
+}

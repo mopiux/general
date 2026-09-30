@@ -13,6 +13,7 @@ import com.mopiux.alquimia.registry.ModMenus;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.gui.screens.MenuScreens;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.alchemy.PotionUtils;
@@ -58,10 +59,13 @@ public final class ClientSetup {
         MinecraftForge.EVENT_BUS.addListener(ClientSetup::onTooltip);
         MinecraftForge.EVENT_BUS.addListener(ClientSetup::onLogout);
         ModLoadingContext.get().registerExtensionPoint(ConfigScreenHandler.ConfigScreenFactory.class,
-                () -> new ConfigScreenHandler.ConfigScreenFactory((mc, parent) -> new ConfigScreen(parent, Alquimia.MOD_ID,
-                        Component.translatable("alquimia.config.title"), List.of(
-                        new ConfigScreen.Section(Component.translatable("alquimia.config.section.client"), AlquimiaConfig.CLIENT_SPEC, false),
-                        new ConfigScreen.Section(Component.translatable("alquimia.config.section.common"), AlquimiaConfig.COMMON_SPEC, false)))));
+                () -> new ConfigScreenHandler.ConfigScreenFactory((mc, parent) -> createConfigScreen(parent)));
+    }
+
+    public static Screen createConfigScreen(Screen parent) {
+        return new ConfigScreen(parent, Alquimia.MOD_ID, Component.translatable("alquimia.config.title"), List.of(
+                new ConfigScreen.Section(Component.translatable("alquimia.config.section.client"), AlquimiaConfig.CLIENT_SPEC, false),
+                new ConfigScreen.Section(Component.translatable("alquimia.config.section.common"), AlquimiaConfig.COMMON_SPEC, false)));
     }
 
     private static void clientSetup(FMLClientSetupEvent event) {

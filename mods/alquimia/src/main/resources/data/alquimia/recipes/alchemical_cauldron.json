@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "c c",
+    "cKc",
+    " s "
+  ],
+  "key": {
+    "c": {
+      "tag": "forge:ingots/copper"
+    },
+    "K": {
+      "item": "minecraft:cauldron"
+    },
+    "s": {
+      "item": "alquimia:salt"
+    }
+  },
+  "result": {
+    "item": "alquimia:alchemical_cauldron",
+    "count": 1
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "ingredient": {
+    "item": "minecraft:fermented_spider_eye"
+  },
+  "transform": {
+    "type": "rotate",
+    "angle": 180
+  }
+}

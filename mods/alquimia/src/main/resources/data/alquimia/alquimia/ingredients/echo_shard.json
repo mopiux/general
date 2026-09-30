@@ -1,0 +1,9 @@
+{
+  "ingredient": {
+    "item": "minecraft:echo_shard"
+  },
+  "transform": {
+    "type": "scale",
+    "factor": 1.5
+  }
+}

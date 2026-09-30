@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "alquimia:salt_ore",
+    "alquimia:deepslate_salt_ore",
+    "alquimia:nether_sulfur_ore",
+    "alquimia:alchemical_cauldron"
+  ]
+}

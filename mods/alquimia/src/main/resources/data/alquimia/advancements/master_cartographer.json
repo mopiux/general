@@ -1,0 +1,30 @@
+{
+  "display": {
+    "icon": {
+      "item": "alquimia:grimoire"
+    },
+    "title": {
+      "translate": "advancements.alquimia.master_cartographer.title"
+    },
+    "description": {
+      "translate": "advancements.alquimia.master_cartographer.description"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "d": {
+      "trigger": "alquimia:alchemy",
+      "conditions": {
+        "event": "discover",
+        "min": 30
+      }
+    }
+  },
+  "parent": "alquimia:cartographer",
+  "rewards": {
+    "experience": 200
+  }
+}

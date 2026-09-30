@@ -1,0 +1,190 @@
+{
+  "dimensions": [
+    "minecraft:the_nether"
+  ],
+  "radius": 100,
+  "zones": [
+    {
+      "effect": "minecraft:fire_resistance",
+      "x": 12.0,
+      "y": -20.8,
+      "radius": 8,
+      "duration": 4800,
+      "max_amplifier": 2
+    },
+    {
+      "effect": "minecraft:weakness",
+      "x": -15.0,
+      "y": 26.0,
+      "radius": 6,
+      "duration": 1800,
+      "max_amplifier": 2
+    },
+    {
+      "effect": "minecraft:slowness",
+      "x": -30.0,
+      "y": 0.0,
+      "radius": 6,
+      "duration": 1800,
+      "max_amplifier": 2
+    },
+    {
+      "effect": "minecraft:strength",
+      "x": 30.6,
+      "y": 25.7,
+      "radius": 7,
+      "duration": 3600,
+      "max_amplifier": 2
+    },
+    {
+      "effect": "minecraft:regeneration",
+      "x": -39.0,
+      "y": 22.5,
+      "radius": 7,
+      "duration": 900,
+      "max_amplifier": 2
+    },
+    {
+      "effect": "minecraft:resistance",
+      "x": -18.8,
+      "y": -51.7,
+      "radius": 7,
+      "duration": 1800,
+      "max_amplifier": 2
+    },
+    {
+      "effect": "minecraft:absorption",
+      "x": -5.2,
+      "y": 59.8,
+      "radius": 6,
+      "duration": 2400,
+      "max_amplifier": 2
+    },
+    {
+      "effect": "minecraft:haste",
+      "x": 60.0,
+      "y": 0.0,
+      "radius": 6,
+      "duration": 3600,
+      "max_amplifier": 2
+    },
+    {
+      "effect": "minecraft:health_boost",
+      "x": -70.5,
+      "y": -25.7,
+      "radius": 6,
+      "duration": 2400,
+      "max_amplifier": 2
+    },
+    {
+      "effect": "minecraft:wither",
+      "x": 53.6,
+      "y": -45.0,
+      "radius": 6,
+      "duration": 400,
+      "max_amplifier": 1
+    },
+    {
+      "effect": "minecraft:nausea",
+      "x": 37.5,
+      "y": 65.0,
+      "radius": 6,
+      "duration": 600,
+      "max_amplifier": 2
+    },
+    {
+      "effect": "minecraft:poison",
+      "x": -0.0,
+      "y": -85.0,
+      "radius": 5,
+      "duration": 900,
+      "max_amplifier": 2
+    },
+    {
+      "effect": "minecraft:night_vision",
+      "x": -51.4,
+      "y": 61.3,
+      "radius": 5,
+      "duration": 4800,
+      "max_amplifier": 2
+    },
+    {
+      "effect": "minecraft:instant_health",
+      "x": 88.6,
+      "y": -15.6,
+      "radius": 5,
+      "duration": 1,
+      "max_amplifier": 1
+    },
+    {
+      "effect": "minecraft:saturation",
+      "x": -88.6,
+      "y": 15.6,
+      "radius": 5,
+      "duration": 1,
+      "max_amplifier": 1
+    }
+  ],
+  "hazards": [
+    {
+      "x": 20,
+      "y": 10,
+      "radius": 4
+    },
+    {
+      "x": 5,
+      "y": 32,
+      "radius": 5
+    },
+    {
+      "x": 35,
+      "y": -25,
+      "radius": 5
+    },
+    {
+      "x": -28,
+      "y": -22,
+      "radius": 5
+    },
+    {
+      "x": 10,
+      "y": -40,
+      "radius": 6
+    },
+    {
+      "x": -45,
+      "y": 50,
+      "radius": 6
+    },
+    {
+      "x": 55,
+      "y": 40,
+      "radius": 6
+    },
+    {
+      "x": -60,
+      "y": -35,
+      "radius": 6
+    },
+    {
+      "x": 75,
+      "y": -40,
+      "radius": 5
+    },
+    {
+      "x": -75,
+      "y": 15,
+      "radius": 5
+    },
+    {
+      "x": 15,
+      "y": 75,
+      "radius": 5
+    },
+    {
+      "x": 80,
+      "y": 25,
+      "radius": 5
+    }
+  ]
+}

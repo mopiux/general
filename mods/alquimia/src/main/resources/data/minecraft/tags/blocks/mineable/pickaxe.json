@@ -1,0 +1,15 @@
+{
+  "replace": false,
+  "values": [
+    "alquimia:salt_ore",
+    "alquimia:deepslate_salt_ore",
+    "alquimia:cinnabar_ore",
+    "alquimia:deepslate_cinnabar_ore",
+    "alquimia:nether_sulfur_ore",
+    "alquimia:salt_block",
+    "alquimia:cinnabar_block",
+    "alquimia:sulfur_block",
+    "alquimia:alchemical_cauldron",
+    "alquimia:mortar"
+  ]
+}

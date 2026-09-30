@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "alquimia:salt_block",
+    "alquimia:cinnabar_block",
+    "alquimia:sulfur_block"
+  ]
+}

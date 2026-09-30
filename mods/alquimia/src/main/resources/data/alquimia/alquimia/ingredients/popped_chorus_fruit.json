@@ -1,0 +1,9 @@
+{
+  "ingredient": {
+    "item": "minecraft:popped_chorus_fruit"
+  },
+  "transform": {
+    "type": "rotate",
+    "angle": -90
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "alquimia:salt"
+    }
+  },
+  "result": {
+    "item": "alquimia:salt_block",
+    "count": 1
+  }
+}

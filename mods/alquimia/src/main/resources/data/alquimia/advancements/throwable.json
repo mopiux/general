@@ -1,0 +1,32 @@
+{
+  "display": {
+    "icon": {
+      "item": "alquimia:alchemical_splash_potion"
+    },
+    "title": {
+      "translate": "advancements.alquimia.throwable.title"
+    },
+    "description": {
+      "translate": "advancements.alquimia.throwable.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "s": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "alquimia:alchemical_splash_potion"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "parent": "alquimia:first_elixir"
+}

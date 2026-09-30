@@ -1,0 +1,8 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#minecraft:is_nether",
+  "features": [
+    "alquimia:nether_sulfur_ore"
+  ],
+  "step": "underground_decoration"
+}

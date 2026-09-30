@@ -1,0 +1,27 @@
+{
+  "display": {
+    "icon": {
+      "item": "alquimia:quicksilver"
+    },
+    "title": {
+      "translate": "advancements.alquimia.prolong.title"
+    },
+    "description": {
+      "translate": "advancements.alquimia.prolong.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "p": {
+      "trigger": "alquimia:alchemy",
+      "conditions": {
+        "event": "prolong",
+        "min": 1
+      }
+    }
+  },
+  "parent": "alquimia:first_essence"
+}
