@@ -1,7 +1,7 @@
 name: Probe
 
-# Herramienta de desarrollo: prepara el entorno de Forge y ejecuta un script
-# (por ejemplo, para consultar firmas de métodos con javap).
+# Herramienta de desarrollo: prepara el entorno de Forge (con fuentes descompiladas)
+# y ejecuta un script, por ejemplo para consultar firmas de métodos con javap.
 on:
   workflow_dispatch:
     inputs:
@@ -26,14 +26,21 @@ jobs:
         with:
           distribution: temurin
           java-version: '17'
-      - uses: gradle/actions/setup-gradle@v4
+      - uses: actions/cache@v4
         with:
-          cache-read-only: false
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: probe-gradle-v2-${{ inputs.mod }}
+          restore-keys: probe-gradle-v2-
       - name: Preparar entorno Forge
         run: |
           chmod +x gradlew
-          ./gradlew -p mods/${{ inputs.mod }} compileJava --no-daemon -q || true
+          ./gradlew -p mods/${{ inputs.mod }} compileJava eclipseClasspath --no-daemon -q > /tmp/setup.log 2>&1 || tail -40 /tmp/setup.log
       - name: Script
         env:
           SCRIPT: ${{ inputs.script }}
-        run: bash -c "$SCRIPT"
+        run: |
+          echo "=====PROBE-START====="
+          bash -c "$SCRIPT" 2>&1
+          echo "=====PROBE-END====="
