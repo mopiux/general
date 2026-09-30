@@ -70,9 +70,9 @@ public class GrimoireScreen extends Screen {
         addRenderableWidget(Button.builder(Component.literal(">"), b -> switchMap(1))
                 .bounds(left + 130, top + 13, 14, 13).tooltip(Tooltip.create(Component.translatable("gui.alquimia.grimoire.next_map"))).build());
         essencesTab = addRenderableWidget(Button.builder(Component.translatable("gui.alquimia.grimoire.essences"), b -> setTab(Tab.ESSENCES))
-                .bounds(left + PAGE_X, top + 13, 63, 14).build());
+                .bounds(left + PAGE_X, top + 13, 54, 14).build());
         ingredientsTab = addRenderableWidget(Button.builder(Component.translatable("gui.alquimia.grimoire.ingredients"), b -> setTab(Tab.INGREDIENTS))
-                .bounds(left + PAGE_X + 65, top + 13, 63, 14).build());
+                .bounds(left + PAGE_X + 56, top + 13, 72, 14).build());
         updateTabs();
     }
 
@@ -116,7 +116,13 @@ public class GrimoireScreen extends Screen {
 
         if (map != null) {
             Component mapName = Component.translatable("alquimia.map." + map.id().getNamespace() + "." + map.id().getPath());
-            g.drawString(font, mapName, left + 80 - font.width(mapName) / 2, top + 16, 0x3A2816, false);
+            int w = font.width(mapName);
+            float scale = Math.min(1f, 94f / Math.max(1, w));
+            g.pose().pushPose();
+            g.pose().translate(left + 80, top + 19.5f - 4 * scale, 0);
+            g.pose().scale(scale, scale, 1f);
+            g.drawString(font, mapName, -w / 2, 0, 0x3A2816, false);
+            g.pose().popPose();
         }
 
         // Página derecha

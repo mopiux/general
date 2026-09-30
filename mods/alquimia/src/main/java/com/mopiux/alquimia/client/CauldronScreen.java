@@ -430,15 +430,17 @@ public class CauldronScreen extends AbstractContainerScreen<CauldronMenu> {
     private void renderStatusStrip(GuiGraphics g) {
         Component text = status != null ? status : hint();
         if (text == null) return;
-        int x0 = view.x, y1 = view.y + view.h, y0 = y1 - 11;
+        float s = 0.75f;
+        int maxW = (int) ((view.w - 6) / s);
+        List<net.minecraft.util.FormattedCharSequence> lines = font.split(text, maxW);
+        int shown = Math.min(2, lines.size());
+        int x0 = view.x, y1 = view.y + view.h, y0 = y1 - (shown == 2 ? 17 : 11);
         g.fill(x0, y0, x0 + view.w, y1, 0xC8201408);
         g.pose().pushPose();
         g.pose().translate(x0 + 3, y0 + 2.5f, 0);
-        float s = 0.75f;
         g.pose().scale(s, s, 1f);
-        int maxW = (int) ((view.w - 6) / s);
-        String str = font.plainSubstrByWidth(text.getString(), maxW);
-        g.drawString(font, str, 0, 0, status != null ? 0xFFFFD27F : 0xFFE8DCC0, false);
+        int color = status != null ? 0xFFFFD27F : 0xFFE8DCC0;
+        for (int i = 0; i < shown; i++) g.drawString(font, lines.get(i), 0, i * 8, color, false);
         g.pose().popPose();
     }
 
@@ -500,7 +502,7 @@ public class CauldronScreen extends AbstractContainerScreen<CauldronMenu> {
         int heat = menu.heat();
         g.blit(AlchemyMapView.ICONS, PANEL_X, 53, heat > 0 ? 42f : 51f, 0f, 9, 9, AlchemyMapView.ICONS_SIZE, AlchemyMapView.ICONS_SIZE);
         Component heatText = Component.translatable("gui.alquimia.heat." + Math.min(heat, 2));
-        g.drawString(font, heatText, PANEL_X + 11, 54, heat > 0 ? 0x404040 : 0xA02020, false);
+        drawSmall(g, heatText, PANEL_X + 11, 55, heat > 0 ? 0x404040 : 0xA02020, 56);
         // Camino pendiente
         Component pathText = menu.isStirring()
                 ? Component.translatable("gui.alquimia.stirring")

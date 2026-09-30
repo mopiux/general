@@ -594,9 +594,9 @@ t("itemGroup.alquimia.main", "Alquimia Cartográfica", "Cartographic Alchemy")
 t("container.alquimia.alchemical_cauldron", "Caldero alquímico", "Alchemical Cauldron")
 
 # mapas
-t("alquimia.map.alquimia.overworld", "Mapa de la superficie", "Overworld Map")
-t("alquimia.map.alquimia.the_nether", "Mapa del Nether", "Nether Map")
-t("alquimia.map.alquimia.the_end", "Mapa del End", "End Map")
+t("alquimia.map.alquimia.overworld", "Superficie", "Overworld")
+t("alquimia.map.alquimia.the_nether", "Nether", "Nether")
+t("alquimia.map.alquimia.the_end", "El End", "The End")
 
 # interfaz del caldero
 t("gui.alquimia.stir", "Remover", "Stir")

@@ -97,8 +97,11 @@ public class MortarBlock extends BaseEntityBlock {
         if (!held.isEmpty()) {
             AlchemyIngredient ing = AlchemyData.get(level).find(held);
             if (ing == null) {
-                if (!level.isClientSide) player.displayClientMessage(Component.translatable("message.alquimia.mortar.not_ingredient"), true);
-                return InteractionResult.sidedSuccess(level.isClientSide);
+                // No es un ingrediente: dejar que el ítem haga lo suyo (por ejemplo, colocar un bloque al lado)
+                if (inside.isEmpty() && !level.isClientSide && held.getItem() instanceof net.minecraft.world.item.BlockItem == false) {
+                    player.displayClientMessage(Component.translatable("message.alquimia.mortar.not_ingredient"), true);
+                }
+                return InteractionResult.PASS;
             }
             if (ing.isTransform()) {
                 if (!level.isClientSide) player.displayClientMessage(Component.translatable("message.alquimia.mortar.cannot_grind"), true);
