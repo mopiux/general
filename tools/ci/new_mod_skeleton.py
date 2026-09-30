@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Genera los archivos Gradle/metadatos comunes de cada mod (build.gradle, settings.gradle,
 gradle.properties, mods.toml, pack.mcmeta). Ejecutar desde la raíz del repo:
-    python3 tools/ci/new_mod_skeleton.py
+    python3 tools/ci/new_mod_skeleton.py [mod_id ...]   (por defecto: alquimia)
 Es idempotente: sobrescribe solo esos archivos de configuración."""
 import os, textwrap
 
@@ -36,7 +36,11 @@ def write(path, content):
     with open(path, "w", encoding="utf-8", newline="\n") as f:
         f.write(content)
 
+import sys
+selected = sys.argv[1:] or ["alquimia"]
 for mod_id, m in MODS.items():
+    if mod_id not in selected:
+        continue
     root = os.path.join("mods", mod_id)
     mixin_plugin = "\n    id 'org.spongepowered.mixin' version '0.7.+'" if m["mixins"] else ""
     mixin_block = textwrap.dedent(f"""

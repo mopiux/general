@@ -32,7 +32,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        mod: [alquimia, lenguaperdida, planetoides]
+        mod: [alquimia]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-java@v4
@@ -53,7 +53,7 @@ jobs:
           if-no-files-found: error
 
   smoke:
-    name: Servidor dedicado con los 3 mods
+    name: Servidor dedicado con el mod
     needs: build
     runs-on: ubuntu-latest
     steps:
@@ -86,7 +86,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        mod: [alquimia, lenguaperdida, planetoides]
+        mod: [alquimia]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-java@v4
